@@ -483,6 +483,12 @@ a,a:link,a:visited,a:hover {
     margin: 15px 0;
     font-size: 16px;
 }
+.about p img {
+    position: relative;
+    top: 2px;
+    width:20px;
+    height: 20px;
+}
 
 .about .cont-box {
     display: flex;
