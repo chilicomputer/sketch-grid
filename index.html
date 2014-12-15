@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="author" content="chillicomputer@gmail.com;zhouliang">
+    <meta name="keywords" content="chillicomputer">
+    <title>gird tool for sketch</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div ng-controller="pannelCtrl">
+    <div class="pannel-box">
+        <div class="pannel-menu" ng-class="{'pannel-menu folded': isMenuActive==0, 'pannel-menu': isMenuActive==1, 'pannel-menu folded short': isMenuActive==-1}">
+            <ul class="menu-items">
+                <li>
+                    <button ng-click="toggleMenu()"><span class="ico menu"></span></button>
+                </li>
+            </ul>
+            <ul class="menu-items disable" ng-class="{'menu-items disable': !canEdit, 'menu-items': canEdit}">
+
+                <li>
+                    <button ng-click="showFs()"><span class="ico import"></span></button>
+                </li>
+                <li>
+                    <button><span class="ico export"></span></button>
+                </li>
+                <li>
+                    <button ng-click="toggleFullscreen()"><span class="ico fullscreen" ng-class="{'ico fullscreen': !fullscreen, 'ico fullscreen contract': fullscreen}"></span></button>
+                </li>
+                <li>
+                    <button ng-click="clear()"><span class="ico clear"></span></button>
+                </li>
+                <li>
+                    <button ng-click="reset()"><span class="ico reset"></span></button>
+                </li>
+                <li>
+                    <button ng-click="showCp()"><span class="ico settings"></span></button>
+                </li>
+                <li>
+                    <button class="switch" ng-class="{'switch active': editType === 'image', 'switch': editType!== 'image'}" ng-click="switchEditType('image')"><span class="ico image"></span></button>
+                    <button class="switch" ng-class="{'switch active': editType === 'grid', 'switch': editType!== 'grid'}" ng-click="switchEditType('grid')"><span class="ico grid"></span></button>
+                </li>
+                <li>
+                    <button ng-click="toggleInfo()"><span class="ico face"></span></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="about" ng-class="{'about': !isInfoOpen, 'about open': isInfoOpen}">
+        <div class="cont-box">
+            <div class="cont">
+                <a href="mailto:chillicomputer@gmail.com"><span class="ico mail"></span></a>
+                <small>Send me a mail.</small>
+            </div>
+            <div class="cont">
+                <a href="#" target="_blank"><span class="ico github"></span></a>
+                <small>Report an issue.</small>
+            </div>
+        </div>
+        <p>&copy;&nbsp;2014 Cc,None-Inc. Not All Rights Reserved.</p>
+    </div>
+
+    <app-ui-modal flag="isFsActive" hide="hideFs()">
+
+        <div class="img-select-menu" style="display:none;">
+
+            <div class="input-tab">
+                <span class="ico file active" ng-class="{'ico file active': tab=='file', 'ico file': tab!='file'}" ng-click="tab = 'file'"></span>
+                <span class="ico link" ng-class="{'ico link active': tab=='link', 'ico link': tab!='link'}" ng-click="tab = 'link'"></span>
+            </div>
+            <div class="input-content">
+                <label class="active" for="file-input" ng-class="{'active': tab=='file', '': tab!='file'}">
+                    <button id="file-input">
+                        <i class="ico folder"></i>
+                        <span>选择文件</span>
+                    </button>
+                    <input class="invisible" type="file" accept="image/*" app-ui-file-reader="imgSrc.val">
+                </label>
+                <label class="" for="url-input" ng-class="{'active': tab=='link', '': tab!='link'}">
+                    <div class="status" ng-class="{'status': !ioBusy, 'status loading': ioBusy}">
+                        <i class="ico play" ng-click="useTmp()"></i>
+                        <svg class="spinner" width="20px" height="20px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                           <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                    </div>
+                    <input type="text" id="url-input" ng-disabled="ioBusy" ng-model="imgSrc.tmp" ng-keyup="$event.keyCode=='13' && useTmp()" placeholder="输入图片地址">
+                </label>
+            </div>
+        </div>
+
+    </app-ui-modal>
+
+
+    <app-ui-modal flag="isCpActive" hide="hideCp()">
+
+        <div class="color-picker-menu" style="display:none;">
+
+            <app-ui-slide-picker model="color.r" color-btn="#ebccd1"></app-ui-slide-picker>
+            <app-ui-slide-picker model="color.g" color-btn="#d6e9c6"></app-ui-slide-picker>
+            <app-ui-slide-picker model="color.b" color-btn="#bce8f1"></app-ui-slide-picker>
+            <app-ui-slide-picker model="color.a"></app-ui-slide-picker>
+        </div>
+
+    </app-ui-modal>
+
+</div>
+
+<app-ui-notify></app-ui-notify>
+<app-ui-painter></app-ui-painter>
+
+<script data-curl-run="run.js" src="lib/curl/src/curl.js"></script>
+</body>
+</html>

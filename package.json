@@ -1,0 +1,27 @@
+{
+    "name": "grid-sketch-app",
+    "version": "0.1.0",
+    "description": "An application to generate grids for sketch.",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "maintainers": [
+        {
+            "name": "Renchi",
+            "mail": "chillicomputer@gmail.com"
+        }
+    ],
+    "dependencies": {},
+    "devDependencies": {
+        "serv": "",
+        "bower": "",
+        "cram": "~0.7"
+    },
+    "scripts": {
+        "start": "serv --port 8000",
+        "cram": "cram index.html"
+    }
+}
