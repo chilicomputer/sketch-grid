@@ -41,7 +41,6 @@ define([
             b: 0,
             a: 0.5
         };
-
         $scope.fullscreen = false;
 
         $scope.toggleMenu = function() {
@@ -137,6 +136,13 @@ define([
 
             // assign the tmp to value and clear tmp
             $scope.imgSrc.val = $scope.imgSrc.tmp;
+        };
+
+        $scope.export = function() {
+
+            if ( !$scope.canEdit ) return;
+
+            $rootScope.$broadcast( 'export' );
         };
 
         // init watchers

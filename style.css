@@ -480,14 +480,14 @@ a,a:link,a:visited,a:hover {
 }
 
 .about p {
-    margin: 15px 0;
-    font-size: 16px;
+    margin: 1em 0;
+    font-size: 12px;
 }
 .about p img {
     position: relative;
     top: 2px;
-    width:20px;
-    height: 20px;
+    width:14px;
+    height: 14px;
 }
 
 .about .cont-box {

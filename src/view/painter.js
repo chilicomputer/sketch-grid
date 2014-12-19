@@ -557,6 +557,8 @@ define([
                 if ( !this._loaded ) return;
 
                 this.ctx.clearRect( 0, 0, this.canvas.width, this.canvas.height );
+                this.ctx.fillStyle = "#ffffff";
+                this.ctx.fillRect( 0, 0, this.canvas.width, this.canvas.height );
 
                 if ( isInit ) {
                     this._img.initAndRender( this.ctx );
@@ -667,7 +669,7 @@ define([
 
             export: function() {
 
-
+                window.open( this.canvas.toDataURL("image/png") );
             },
 
             clear: function() {
@@ -759,6 +761,11 @@ define([
             $scope.$on( 'reset', function() {
 
                 painter.isloaded() && painter.reset();
+            });
+
+            $scope.$on( 'export', function( e, data ) {
+
+                painter.isloaded() && painter.export();
             });
         };
 
